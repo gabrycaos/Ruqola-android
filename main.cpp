@@ -28,7 +28,7 @@
 #include "src/rocketchatbackend.h"
 #include "src/ruqola.h"
 #include "src/notification.h"
-
+#include "src/NotificationHandler.h"
 #include <QDebug>
 #include <QtCore/QJsonDocument>
 #include <QtCore>
@@ -60,5 +60,9 @@ int main(int argc, char *argv[])
     if (engine.rootObjects().isEmpty())
         return -1;
 
+    NotificationHandler::GetInstance()->StartMessaging();
+
+
     return app.exec();
 }
+

@@ -4,14 +4,16 @@ QT += widgets gui core qml quick websockets
 android: QT+= androidextras
 
 HEADERS += src/messagemodel.h src/roommodel.h src/ddpclient.h src/ruqola.h src/rocketchatbackend.h \
-    src/notification.h
+    src/notification.h \
+    src/NotificationHandler.h
 SOURCES += main.cpp src/messagemodel.cpp src/roommodel.cpp src/ddpclient.cpp src/ruqola.cpp src/rocketchatbackend.cpp \
-    src/notification.cpp
+    src/notification.cpp \
+    src/NotificationHandler.cpp
 
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-# QML_IMPORT_PATH = 
+# QML_IMPORT_PATH =
 
 # Default rules for deployment.
 include(deployment.pri)
@@ -49,3 +51,33 @@ DISTFILES += \
     android/res/drawable/icon.png
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+android {
+    QT += androidextras
+    FIREBASE_SDK = /Users/falascagabriele/firebase_cpp_sdk/
+    #INCLUDEPATH += $FIREBASE_SDK/include/
+    # This didn’t work. Figure that out at some point
+    INCLUDEPATH += /Users/falascagabriele/firebase_cpp_sdk/include/
+
+    # There are some extra dependencies besides just libmessaging.a
+    LIBS += -L/Users/falascagabriele/firebase_cpp_sdk/libs/android/armeabi-v7a/c++/ -lmessaging -lapp -llog -lauth
+}
+
+# I suggest putting this in later
+
+android {
+
+    DISTFILES += \
+        android/gradle.properties \
+        android/google-services.json \
+        android/AndroidManifest.xml \
+        android/build.gradle \
+        android/gradle/wrapper/gradle-wrapper.properties \
+
+        HEADERS += \
+             src/FBListener.h
+
+
+        SOURCES += \
+            src/FBListener.cpp
+}

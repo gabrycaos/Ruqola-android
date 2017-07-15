@@ -9,6 +9,18 @@ buildscript {
     }
 }
 
+project.ext {
+  // Configure the Firebase C++ SDK location. This is the property that you set in gradle.properties
+  // This might need to be more complex. I got this from https://github.com/firebase/quickstart-cpp/blob/master/remote_config/testapp/build.gradle
+  firebase_cpp_sdk_dir = System.getProperty('firebase_cpp_sdk.dir')
+}
+
+repositories {
+    flatDir {
+    dirs project.ext.firebase_cpp_sdk_dir + "/libs/android"
+  }
+}
+
 allprojects {
     repositories {
         jcenter()
@@ -20,9 +32,14 @@ apply plugin: 'com.android.application'
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.google.firebase:firebase-core:9.6.0'
-    compile 'com.google.firebase:firebase-messaging:9.6.0'
-    compile 'com.google.firebase:firebase-crash:9.6.0'
+ //   compile 'com.google.firebase:firebase-core:9.6.0'
+ //   compile 'com.google.firebase:firebase-messaging:9.6.0'
+ //   compile 'com.google.firebase:firebase-crash:9.6.0'
+    compile 'com.google.firebase:firebase-core:10.2.4'
+    compile 'com.google.firebase:firebase-auth:10.2.4'
+    compile 'com.google.firebase:firebase-messaging:10.2.4'
+    compile 'com.google.firebase.messaging.cpp:firebase_messaging_cpp@aar'
+    compile 'com.google.android.gms:play-services-base:10.2.4'
 }
 
 android {

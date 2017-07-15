@@ -6,4 +6,5 @@
 androidBuildToolsVersion=25.0.2
 androidCompileSdkVersion=26
 buildDir=.build
-qt5AndroidDir=/home/vasudha/Qt5.9.1/5.9.1/android_armv7/src/android/java
+qt5AndroidDir=/Users/falascagabriele/Qt/5.9.1/android_armv7/src/android/java
+systemProp.firebase_cpp_sdk.dir=/Users/falascagabriele/firebase_cpp_sdk/
